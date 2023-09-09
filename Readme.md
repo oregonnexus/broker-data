@@ -8,11 +8,11 @@ Then do the instructions to add it to the profile
 
 ### Create Migration
 ```
-dotnet-ef migrations add InitialCreate --project  ../OregonNexus.Broker.Data.Migrations.PostgreSQL
+dotnet-ef migrations add InitialRequests --project  ../../broker-data/src/OregonNexus.Broker.Data.Migrations.PostgreSQL
 ```
 ### Remove Last Migration
 ```
-dotnet-ef migrations remove --project  ../OregonNexus.Broker.Data.Migrations.PostgreSQL
+dotnet-ef migrations remove --project  ../../broker-data/src/OregonNexus.Broker.Data.Migrations.PostgreSQL
 ```
 ### Apply to latest migration
 ```
