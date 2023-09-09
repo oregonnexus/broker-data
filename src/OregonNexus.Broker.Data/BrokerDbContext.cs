@@ -23,6 +23,9 @@ public class BrokerDbContext : IdentityDbContext<IdentityUser<Guid>, IdentityRol
 
     public DbSet<EducationOrganization>? EducationOrganizations { get; set; }
     public DbSet<User>? ApplicationUsers { get; set; }
+    public DbSet<IncomingRequest>? IncomingRequests { get; set; }
+    public DbSet<OutgoingRequest>? OutgoingRequests { get; set; }
+    public DbSet<PayloadContent>? PayloadContents { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
