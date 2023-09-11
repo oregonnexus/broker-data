@@ -14,5 +14,8 @@ public class OutgoingRequestConfiguration : IEntityTypeConfiguration<OutgoingReq
     {   
         // Rename ID
         builder.Property(i => i.Id).HasColumnName("OutgoingRequestId");
+
+        builder.Property(b => b._requestDetails).HasColumnName("RequestDetails");
+        builder.Ignore(b => b.RequestDetails);
     }
 }
