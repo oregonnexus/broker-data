@@ -9,25 +9,9 @@ namespace OregonNexus.Broker.Data.IntegrationTests.Fixtures;
 
 public class BrokerWebDIServicesFixture : IDisposable
 {
-    private ServiceProvider _serviceProvider;
+    private ServiceProvider? _serviceProvider;
 
-    public BrokerDbContext BrokerDbContextService
-    {
-        get
-        {
-            return _serviceProvider.GetService<BrokerDbContext>();
-        }
-    }
-
-    public UserManager<IdentityUser<Guid>> UserManagerService
-    {
-        get
-        {
-            return _serviceProvider.GetService<UserManager<IdentityUser<Guid>>>();
-        }
-    }
-
-    public ServiceProvider Services
+    public ServiceProvider? Services
     {
         get
         {
@@ -37,19 +21,17 @@ public class BrokerWebDIServicesFixture : IDisposable
 
     public BrokerWebDIServicesFixture()
     {
-        createServices();
+        CreateServices();
+        PrepareDbContext();
 
-        BrokerDbFixture.BrokerDbContext = Services.GetService<BrokerDbContext>();
-        BrokerDbFixture.UserRepository = Services.GetService<IRepository<User>>();
-        BrokerDbFixture.UserManagerService = Services.GetService<UserManager<IdentityUser<Guid>>>();
+        BrokerDbFixture.Services = Services;
 
         Task.WaitAll(
-            PrepareDbContext(),
             BrokerDbFixture.SeedDbContext()
         );
     }
 
-    private void createServices()
+    private void CreateServices()
     {
         var configuration = new ConfigurationBuilder()
             .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
@@ -66,10 +48,16 @@ public class BrokerWebDIServicesFixture : IDisposable
         _serviceProvider = services.BuildServiceProvider();
     }
 
-    private async Task PrepareDbContext()
+    private void PrepareDbContext()
     {   
-        BrokerDbContextService.Database.EnsureDeleted();
-        BrokerDbContextService.Database.EnsureCreated();
+        if (Services is null) { return; }
+        
+        var dbContext = Services.GetService<BrokerDbContext>();
+        
+        if (dbContext is null) { return; }
+
+        dbContext.Database.EnsureDeleted();
+        dbContext.Database.EnsureCreated();
     }
 
     public void Dispose()
