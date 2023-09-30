@@ -71,8 +71,7 @@ namespace OregonNexus.Broker.Data.Migrations.PostgreSQL.Migrations
                 columns: table => new
                 {
                     PayloadContentId = table.Column<Guid>(type: "uuid", nullable: false),
-                    RequestId = table.Column<Guid>(type: "uuid", nullable: false),
-                    RequestResponse = table.Column<int>(type: "integer", nullable: false),
+                    MessageId = table.Column<Guid>(type: "uuid", nullable: false),
                     ContentType = table.Column<string>(type: "text", nullable: true),
                     BlobContent = table.Column<byte[]>(type: "bytea", nullable: true),
                     JsonContent = table.Column<JsonDocument>(type: "jsonb", nullable: true),
@@ -86,10 +85,10 @@ namespace OregonNexus.Broker.Data.Migrations.PostgreSQL.Migrations
                 {
                     table.PrimaryKey("PK_PayloadContents", x => x.PayloadContentId);
                     table.ForeignKey(
-                        name: "FK_PayloadContents_Requests_RequestId",
-                        column: x => x.RequestId,
-                        principalTable: "Requests",
-                        principalColumn: "RequestId",
+                        name: "FK_PayloadContents_Messages_MessageId",
+                        column: x => x.MessageId,
+                        principalTable: "Messages",
+                        principalColumn: "MessageId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -99,9 +98,9 @@ namespace OregonNexus.Broker.Data.Migrations.PostgreSQL.Migrations
                 column: "RequestId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PayloadContents_RequestId",
+                name: "IX_PayloadContents_MessageId",
                 table: "PayloadContents",
-                column: "RequestId");
+                column: "MessageId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Requests_EducationOrganizationId",
@@ -113,10 +112,10 @@ namespace OregonNexus.Broker.Data.Migrations.PostgreSQL.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Messages");
+                name: "PayloadContents");
 
             migrationBuilder.DropTable(
-                name: "PayloadContents");
+                name: "Messages");
 
             migrationBuilder.DropTable(
                 name: "Requests");

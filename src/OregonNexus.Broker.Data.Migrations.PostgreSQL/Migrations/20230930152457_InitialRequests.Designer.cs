@@ -13,7 +13,7 @@ using OregonNexus.Broker.Data;
 namespace OregonNexus.Broker.Data.Migrations.PostgreSQL.Migrations
 {
     [DbContext(typeof(BrokerDbContext))]
-    [Migration("20230921035858_InitialRequests")]
+    [Migration("20230930152457_InitialRequests")]
     partial class InitialRequests
     {
         /// <inheritdoc />
@@ -21,7 +21,7 @@ namespace OregonNexus.Broker.Data.Migrations.PostgreSQL.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.10")
+                .HasAnnotation("ProductVersion", "7.0.11")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -360,11 +360,8 @@ namespace OregonNexus.Broker.Data.Migrations.PostgreSQL.Migrations
                     b.Property<JsonDocument>("JsonContent")
                         .HasColumnType("jsonb");
 
-                    b.Property<Guid>("RequestId")
+                    b.Property<Guid>("MessageId")
                         .HasColumnType("uuid");
-
-                    b.Property<int>("RequestResponse")
-                        .HasColumnType("integer");
 
                     b.Property<DateTimeOffset?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -377,7 +374,7 @@ namespace OregonNexus.Broker.Data.Migrations.PostgreSQL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RequestId");
+                    b.HasIndex("MessageId");
 
                     b.ToTable("PayloadContents", (string)null);
                 });
@@ -593,13 +590,13 @@ namespace OregonNexus.Broker.Data.Migrations.PostgreSQL.Migrations
 
             modelBuilder.Entity("OregonNexus.Broker.Domain.PayloadContent", b =>
                 {
-                    b.HasOne("OregonNexus.Broker.Domain.Request", "Request")
-                        .WithMany("PayloadContents")
-                        .HasForeignKey("RequestId")
+                    b.HasOne("OregonNexus.Broker.Domain.Message", "Message")
+                        .WithMany()
+                        .HasForeignKey("MessageId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Request");
+                    b.Navigation("Message");
                 });
 
             modelBuilder.Entity("OregonNexus.Broker.Domain.Request", b =>
@@ -633,11 +630,6 @@ namespace OregonNexus.Broker.Data.Migrations.PostgreSQL.Migrations
                     b.Navigation("EducationOrganization");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("OregonNexus.Broker.Domain.Request", b =>
-                {
-                    b.Navigation("PayloadContents");
                 });
 
             modelBuilder.Entity("OregonNexus.Broker.Domain.User", b =>
