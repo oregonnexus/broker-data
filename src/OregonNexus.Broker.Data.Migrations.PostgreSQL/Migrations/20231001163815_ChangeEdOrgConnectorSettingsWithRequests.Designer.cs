@@ -13,8 +13,8 @@ using OregonNexus.Broker.Data;
 namespace OregonNexus.Broker.Data.Migrations.PostgreSQL.Migrations
 {
     [DbContext(typeof(BrokerDbContext))]
-    [Migration("20230930152457_InitialRequests")]
-    partial class InitialRequests
+    [Migration("20231001163815_ChangeEdOrgConnectorSettingsWithRequests")]
+    partial class ChangeEdOrgConnectorSettingsWithRequests
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -280,8 +280,8 @@ namespace OregonNexus.Broker.Data.Migrations.PostgreSQL.Migrations
                     b.Property<Guid?>("EducationOrganizationId")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("Settings")
-                        .HasColumnType("text");
+                    b.Property<JsonDocument>("Settings")
+                        .HasColumnType("jsonb");
 
                     b.Property<DateTimeOffset?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");

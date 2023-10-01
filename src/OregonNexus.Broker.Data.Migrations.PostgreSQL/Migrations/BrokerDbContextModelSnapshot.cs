@@ -277,8 +277,8 @@ namespace OregonNexus.Broker.Data.Migrations.PostgreSQL.Migrations
                     b.Property<Guid?>("EducationOrganizationId")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("Settings")
-                        .HasColumnType("text");
+                    b.Property<JsonDocument>("Settings")
+                        .HasColumnType("jsonb");
 
                     b.Property<DateTimeOffset?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
