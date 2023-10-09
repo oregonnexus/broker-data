@@ -13,15 +13,15 @@ using OregonNexus.Broker.Data;
 namespace OregonNexus.Broker.Data.Migrations.PostgreSQL.Migrations
 {
     [DbContext(typeof(BrokerDbContext))]
-    [Migration("20230909155818_InitialRequests")]
-    partial class InitialRequests
+    [Migration("20231001163815_ChangeEdOrgConnectorSettingsWithRequests")]
+    partial class ChangeEdOrgConnectorSettingsWithRequests
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.10")
+                .HasAnnotation("ProductVersion", "7.0.11")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -280,8 +280,8 @@ namespace OregonNexus.Broker.Data.Migrations.PostgreSQL.Migrations
                     b.Property<Guid?>("EducationOrganizationId")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("Settings")
-                        .HasColumnType("text");
+                    b.Property<JsonDocument>("Settings")
+                        .HasColumnType("jsonb");
 
                     b.Property<DateTimeOffset?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -297,12 +297,12 @@ namespace OregonNexus.Broker.Data.Migrations.PostgreSQL.Migrations
                     b.ToTable("EducationOrganizationConnectorSettings");
                 });
 
-            modelBuilder.Entity("OregonNexus.Broker.Domain.IncomingRequest", b =>
+            modelBuilder.Entity("OregonNexus.Broker.Domain.Message", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid")
-                        .HasColumnName("IncomingRequestId");
+                        .HasColumnName("MessageId");
 
                     b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -310,20 +310,20 @@ namespace OregonNexus.Broker.Data.Migrations.PostgreSQL.Migrations
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid?>("EducationOrganizationId")
-                        .HasColumnType("uuid");
+                    b.Property<JsonDocument>("MessageContents")
+                        .HasColumnType("jsonb");
 
-                    b.Property<DateTime>("RequestDate")
+                    b.Property<DateTime>("MessageTimestamp")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("RequestStatus")
-                        .HasColumnType("integer");
-
-                    b.Property<Guid?>("RequestUserId")
+                    b.Property<Guid>("RequestId")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("Student")
-                        .HasColumnType("text");
+                    b.Property<int>("RequestResponse")
+                        .HasColumnType("integer");
+
+                    b.Property<JsonDocument>("TransmissionDetails")
+                        .HasColumnType("jsonb");
 
                     b.Property<DateTimeOffset?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -333,57 +333,9 @@ namespace OregonNexus.Broker.Data.Migrations.PostgreSQL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EducationOrganizationId");
+                    b.HasIndex("RequestId");
 
-                    b.HasIndex("RequestUserId");
-
-                    b.ToTable("IncomingRequests");
-                });
-
-            modelBuilder.Entity("OregonNexus.Broker.Domain.OutgoingRequest", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasColumnName("OutgoingRequestId");
-
-                    b.Property<DateTimeOffset>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<Guid?>("CreatedBy")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid?>("EducationOrganizationId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid?>("ProcessUserId")
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime>("RequestDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("RequestDetails")
-                        .HasColumnType("text");
-
-                    b.Property<int>("RequestStatus")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Student")
-                        .HasColumnType("text");
-
-                    b.Property<DateTimeOffset?>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<Guid?>("UpdatedBy")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EducationOrganizationId");
-
-                    b.HasIndex("ProcessUserId");
-
-                    b.ToTable("OutgoingRequests");
+                    b.ToTable("Messages", (string)null);
                 });
 
             modelBuilder.Entity("OregonNexus.Broker.Domain.PayloadContent", b =>
@@ -405,13 +357,10 @@ namespace OregonNexus.Broker.Data.Migrations.PostgreSQL.Migrations
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid?>("IncomingRequestId")
-                        .HasColumnType("uuid");
-
                     b.Property<JsonDocument>("JsonContent")
                         .HasColumnType("jsonb");
 
-                    b.Property<Guid?>("OutgoingRequestId")
+                    b.Property<Guid>("MessageId")
                         .HasColumnType("uuid");
 
                     b.Property<DateTimeOffset?>("UpdatedAt")
@@ -425,11 +374,59 @@ namespace OregonNexus.Broker.Data.Migrations.PostgreSQL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IncomingRequestId");
+                    b.HasIndex("MessageId");
 
-                    b.HasIndex("OutgoingRequestId");
+                    b.ToTable("PayloadContents", (string)null);
+                });
 
-                    b.ToTable("PayloadContents");
+            modelBuilder.Entity("OregonNexus.Broker.Domain.Request", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("RequestId");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("EducationOrganizationId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime?>("InitialRequestSentDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<JsonDocument>("RequestManifest")
+                        .HasColumnType("jsonb");
+
+                    b.Property<Guid?>("RequestProcessUserId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("RequestStatus")
+                        .HasColumnType("integer");
+
+                    b.Property<JsonDocument>("ResponseManifest")
+                        .HasColumnType("jsonb");
+
+                    b.Property<Guid?>("ResponseProcessUserId")
+                        .HasColumnType("uuid");
+
+                    b.Property<JsonDocument>("Student")
+                        .HasColumnType("jsonb");
+
+                    b.Property<DateTimeOffset?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("UpdatedBy")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EducationOrganizationId");
+
+                    b.ToTable("Requests");
                 });
 
             modelBuilder.Entity("OregonNexus.Broker.Domain.User", b =>
@@ -580,49 +577,35 @@ namespace OregonNexus.Broker.Data.Migrations.PostgreSQL.Migrations
                     b.Navigation("EducationOrganization");
                 });
 
-            modelBuilder.Entity("OregonNexus.Broker.Domain.IncomingRequest", b =>
+            modelBuilder.Entity("OregonNexus.Broker.Domain.Message", b =>
                 {
-                    b.HasOne("OregonNexus.Broker.Domain.EducationOrganization", "EducationOrganization")
+                    b.HasOne("OregonNexus.Broker.Domain.Request", "Request")
                         .WithMany()
-                        .HasForeignKey("EducationOrganizationId");
+                        .HasForeignKey("RequestId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("OregonNexus.Broker.Domain.User", "RequestUser")
-                        .WithMany()
-                        .HasForeignKey("RequestUserId");
-
-                    b.Navigation("EducationOrganization");
-
-                    b.Navigation("RequestUser");
-                });
-
-            modelBuilder.Entity("OregonNexus.Broker.Domain.OutgoingRequest", b =>
-                {
-                    b.HasOne("OregonNexus.Broker.Domain.EducationOrganization", "EducationOrganization")
-                        .WithMany()
-                        .HasForeignKey("EducationOrganizationId");
-
-                    b.HasOne("OregonNexus.Broker.Domain.User", "ProcessUser")
-                        .WithMany()
-                        .HasForeignKey("ProcessUserId");
-
-                    b.Navigation("EducationOrganization");
-
-                    b.Navigation("ProcessUser");
+                    b.Navigation("Request");
                 });
 
             modelBuilder.Entity("OregonNexus.Broker.Domain.PayloadContent", b =>
                 {
-                    b.HasOne("OregonNexus.Broker.Domain.IncomingRequest", "IncomingRequest")
+                    b.HasOne("OregonNexus.Broker.Domain.Message", "Message")
                         .WithMany()
-                        .HasForeignKey("IncomingRequestId");
+                        .HasForeignKey("MessageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("OregonNexus.Broker.Domain.OutgoingRequest", "OutgoingRequest")
+                    b.Navigation("Message");
+                });
+
+            modelBuilder.Entity("OregonNexus.Broker.Domain.Request", b =>
+                {
+                    b.HasOne("OregonNexus.Broker.Domain.EducationOrganization", "EducationOrganization")
                         .WithMany()
-                        .HasForeignKey("OutgoingRequestId");
+                        .HasForeignKey("EducationOrganizationId");
 
-                    b.Navigation("IncomingRequest");
-
-                    b.Navigation("OutgoingRequest");
+                    b.Navigation("EducationOrganization");
                 });
 
             modelBuilder.Entity("OregonNexus.Broker.Domain.User", b =>

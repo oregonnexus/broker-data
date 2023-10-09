@@ -13,6 +13,7 @@ public class PayloadContentConfiguration : IEntityTypeConfiguration<PayloadConte
 {
     public void Configure(EntityTypeBuilder<PayloadContent> builder)
     {   
+        builder.ToTable("PayloadContents");
         // Rename ID
         builder.Property(i => i.Id).HasColumnName("PayloadContentId");
 

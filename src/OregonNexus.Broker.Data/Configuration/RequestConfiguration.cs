@@ -8,11 +8,11 @@ using OregonNexus.Broker.Domain;
 
 namespace OregonNexus.Broker.Data.Configuration;
 
-public class IncomingRequestConfiguration : IEntityTypeConfiguration<IncomingRequest>
+public class RequestConfiguration : IEntityTypeConfiguration<Request>
 {
-    public void Configure(EntityTypeBuilder<IncomingRequest> builder)
+    public void Configure(EntityTypeBuilder<Request> builder)
     {   
         // Rename ID
-        builder.Property(i => i.Id).HasColumnName("IncomingRequestId");
+        builder.Property(i => i.Id).HasColumnName("RequestId");
     }
 }
