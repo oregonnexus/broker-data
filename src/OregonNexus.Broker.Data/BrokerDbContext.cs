@@ -21,7 +21,6 @@ public class BrokerDbContext : IdentityDbContext<IdentityUser<Guid>, IdentityRol
         //_mediator = mediator;
     }
 
-    public DbSet<Address>? Addresses { get; set; }
     public DbSet<EducationOrganization>? EducationOrganizations { get; set; }
     public DbSet<User>? ApplicationUsers { get; set; }
     public DbSet<Request>? Requests { get; set; }

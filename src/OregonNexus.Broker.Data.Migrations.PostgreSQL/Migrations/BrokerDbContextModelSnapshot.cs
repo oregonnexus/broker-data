@@ -18,7 +18,7 @@ namespace OregonNexus.Broker.Data.Migrations.PostgreSQL.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.12")
+                .HasAnnotation("ProductVersion", "7.0.13")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -218,45 +218,6 @@ namespace OregonNexus.Broker.Data.Migrations.PostgreSQL.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("OregonNexus.Broker.Domain.Address", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<DateTimeOffset>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<Guid?>("CreatedBy")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("PostalCode")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("StateAbbreviation")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("StreetNumberName")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<DateTimeOffset?>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<Guid?>("UpdatedBy")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Address");
-                });
-
             modelBuilder.Entity("OregonNexus.Broker.Domain.EducationOrganization", b =>
                 {
                     b.Property<Guid>("Id")
@@ -264,8 +225,8 @@ namespace OregonNexus.Broker.Data.Migrations.PostgreSQL.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("EducationOrganizationId");
 
-                    b.Property<Guid?>("AddressId")
-                        .HasColumnType("uuid");
+                    b.Property<string>("City")
+                        .HasColumnType("text");
 
                     b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -286,6 +247,15 @@ namespace OregonNexus.Broker.Data.Migrations.PostgreSQL.Migrations
                     b.Property<Guid?>("ParentOrganizationId")
                         .HasColumnType("uuid");
 
+                    b.Property<string>("PostalCode")
+                        .HasColumnType("text");
+
+                    b.Property<string>("StateAbbreviation")
+                        .HasColumnType("text");
+
+                    b.Property<string>("StreetNumberName")
+                        .HasColumnType("text");
+
                     b.Property<DateTimeOffset?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
@@ -293,8 +263,6 @@ namespace OregonNexus.Broker.Data.Migrations.PostgreSQL.Migrations
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AddressId");
 
                     b.HasIndex("ParentOrganizationId");
 
@@ -642,15 +610,9 @@ namespace OregonNexus.Broker.Data.Migrations.PostgreSQL.Migrations
 
             modelBuilder.Entity("OregonNexus.Broker.Domain.EducationOrganization", b =>
                 {
-                    b.HasOne("OregonNexus.Broker.Domain.Address", "Address")
-                        .WithMany()
-                        .HasForeignKey("AddressId");
-
                     b.HasOne("OregonNexus.Broker.Domain.EducationOrganization", "ParentOrganization")
                         .WithMany()
                         .HasForeignKey("ParentOrganizationId");
-
-                    b.Navigation("Address");
 
                     b.Navigation("ParentOrganization");
                 });

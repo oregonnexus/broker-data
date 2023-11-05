@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace OregonNexus.Broker.Data.Migrations.PostgreSQL.Migrations
 {
     /// <inheritdoc />
-    public partial class AddAddressEntity : Migration
+    public partial class EdOrgAddress : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -28,60 +28,48 @@ namespace OregonNexus.Broker.Data.Migrations.PostgreSQL.Migrations
                 oldClrType: typeof(DateTime),
                 oldType: "timestamp with time zone");
 
-            migrationBuilder.AddColumn<Guid>(
-                name: "AddressId",
+            migrationBuilder.AddColumn<string>(
+                name: "City",
                 table: "EducationOrganizations",
-                type: "uuid",
+                type: "text",
                 nullable: true);
 
-            migrationBuilder.CreateTable(
-                name: "Address",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    StreetNumberName = table.Column<string>(type: "text", nullable: false),
-                    City = table.Column<string>(type: "text", nullable: false),
-                    StateAbbreviation = table.Column<string>(type: "text", nullable: false),
-                    PostalCode = table.Column<string>(type: "text", nullable: false),
-                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    CreatedBy = table.Column<Guid>(type: "uuid", nullable: true),
-                    UpdatedBy = table.Column<Guid>(type: "uuid", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Address", x => x.Id);
-                });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_EducationOrganizations_AddressId",
+            migrationBuilder.AddColumn<string>(
+                name: "PostalCode",
                 table: "EducationOrganizations",
-                column: "AddressId");
+                type: "text",
+                nullable: true);
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_EducationOrganizations_Address_AddressId",
+            migrationBuilder.AddColumn<string>(
+                name: "StateAbbreviation",
                 table: "EducationOrganizations",
-                column: "AddressId",
-                principalTable: "Address",
-                principalColumn: "Id");
+                type: "text",
+                nullable: true);
+
+            migrationBuilder.AddColumn<string>(
+                name: "StreetNumberName",
+                table: "EducationOrganizations",
+                type: "text",
+                nullable: true);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_EducationOrganizations_Address_AddressId",
-                table: "EducationOrganizations");
-
-            migrationBuilder.DropTable(
-                name: "Address");
-
-            migrationBuilder.DropIndex(
-                name: "IX_EducationOrganizations_AddressId",
+            migrationBuilder.DropColumn(
+                name: "City",
                 table: "EducationOrganizations");
 
             migrationBuilder.DropColumn(
-                name: "AddressId",
+                name: "PostalCode",
+                table: "EducationOrganizations");
+
+            migrationBuilder.DropColumn(
+                name: "StateAbbreviation",
+                table: "EducationOrganizations");
+
+            migrationBuilder.DropColumn(
+                name: "StreetNumberName",
                 table: "EducationOrganizations");
 
             migrationBuilder.AlterColumn<DateTime>(
