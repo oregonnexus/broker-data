@@ -266,7 +266,7 @@ namespace OregonNexus.Broker.Data.Migrations.PostgreSQL.Migrations
 
                     b.HasIndex("ParentOrganizationId");
 
-                    b.ToTable("EducationOrganizations");
+                    b.ToTable("EducationOrganizations", (string)null);
                 });
 
             modelBuilder.Entity("OregonNexus.Broker.Domain.EducationOrganizationConnectorSettings", b =>
@@ -303,7 +303,7 @@ namespace OregonNexus.Broker.Data.Migrations.PostgreSQL.Migrations
                     b.HasIndex("EducationOrganizationId", "Connector")
                         .IsUnique();
 
-                    b.ToTable("EducationOrganizationConnectorSettings");
+                    b.ToTable("EducationOrganizationConnectorSettings", (string)null);
                 });
 
             modelBuilder.Entity("OregonNexus.Broker.Domain.EducationOrganizationPayloadSettings", b =>
@@ -343,7 +343,7 @@ namespace OregonNexus.Broker.Data.Migrations.PostgreSQL.Migrations
                     b.HasIndex("EducationOrganizationId", "Payload")
                         .IsUnique();
 
-                    b.ToTable("EducationOrganizationPayloadSettings");
+                    b.ToTable("EducationOrganizationPayloadSettings", (string)null);
                 });
 
             modelBuilder.Entity("OregonNexus.Broker.Domain.Message", b =>
@@ -475,7 +475,7 @@ namespace OregonNexus.Broker.Data.Migrations.PostgreSQL.Migrations
 
                     b.HasIndex("EducationOrganizationId");
 
-                    b.ToTable("Requests");
+                    b.ToTable("Requests", (string)null);
                 });
 
             modelBuilder.Entity("OregonNexus.Broker.Domain.User", b =>
