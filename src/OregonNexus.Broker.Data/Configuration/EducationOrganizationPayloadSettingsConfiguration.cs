@@ -19,6 +19,6 @@ public class EducationOrganizationPayloadSettingsConfiguration : IEntityTypeConf
         builder.OwnsMany(i => i.Settings).ToJson();
 
         // Create unique key constraint for EducationOrganizationid and UserId
-        builder.HasIndex(x => new { x.EducationOrganizationId, x.Payload } ).IsUnique();
+        builder.HasIndex(x => new { x.EducationOrganizationId, x.Payload, x.PayloadDirection } ).IsUnique();
     }
 }
