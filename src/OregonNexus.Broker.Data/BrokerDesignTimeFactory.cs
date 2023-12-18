@@ -17,13 +17,13 @@ public class ContractContextFactory : IDesignTimeDbContextFactory<BrokerDbContex
         
         var optionsBuilder = new DbContextOptionsBuilder<BrokerDbContext>();
 
-        // if (msSqlConnectionString is not null && msSqlConnectionString != "")
-        // {
-        //     optionsBuilder.UseSqlServer(
-        //         config.GetConnectionString("MsSqlBrokerDatabase")!,
-        //         x => x.MigrationsAssembly("OregonNexus.Broker.Data.Migrations.SqlServer")
-        //     );
-        // }
+        if (msSqlConnectionString is not null && msSqlConnectionString != "")
+        {
+            optionsBuilder.UseSqlServer(
+                config.GetConnectionString("MsSqlBrokerDatabase")!,
+                x => x.MigrationsAssembly("OregonNexus.Broker.Data.Migrations.SqlServer")
+            );
+        }
         if (pgSqlConnectionString is not null && pgSqlConnectionString != "")
         {
             optionsBuilder.UseNpgsql(
