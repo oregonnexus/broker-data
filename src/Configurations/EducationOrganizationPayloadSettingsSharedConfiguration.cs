@@ -16,9 +16,10 @@ internal class EducationOrganizationPayloadSettingsSharedConfiguration : IEntity
         builder.Property(i => i.Id).HasColumnName("EducationOrganizationPayloadSettingsId");
 
         // Settings is json
-        builder.OwnsMany(i => i.Settings).ToJson();
+        builder.OwnsOne(i => i.IncomingPayloadSettings, nv => { nv.ToJson(); nv.OwnsMany(i => i.PayloadContents); });
+        builder.OwnsOne(i => i.OutgoingPayloadSettings, nv => { nv.ToJson(); nv.OwnsMany(i => i.PayloadContents); });
 
         // Create unique key constraint for EducationOrganizationid and UserId
-        builder.HasIndex(x => new { x.EducationOrganizationId, x.Payload, x.PayloadDirection } ).IsUnique();
+        builder.HasIndex(x => new { x.EducationOrganizationId, x.Payload } ).IsUnique();
     }
 }
