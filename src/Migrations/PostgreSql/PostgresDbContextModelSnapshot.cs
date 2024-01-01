@@ -679,7 +679,7 @@ namespace OregonNexus.Broker.Data.Migrations.PostgreSql
                             b1.Property<Guid>("EducationOrganizationPayloadSettingsId")
                                 .HasColumnType("uuid");
 
-                            b1.Property<string>("PrimaryDataConnector")
+                            b1.Property<string>("StudentLookupConnector")
                                 .HasColumnType("text");
 
                             b1.HasKey("EducationOrganizationPayloadSettingsId");
