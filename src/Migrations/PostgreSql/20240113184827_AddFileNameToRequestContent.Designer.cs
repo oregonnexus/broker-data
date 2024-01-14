@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using OregonNexus.Broker.Data;
@@ -11,9 +12,11 @@ using OregonNexus.Broker.Data;
 namespace OregonNexus.Broker.Data.Migrations.PostgreSql
 {
     [DbContext(typeof(PostgresDbContext))]
-    partial class PostgresDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240113184827_AddFileNameToRequestContent")]
+    partial class AddFileNameToRequestContent
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -265,7 +268,7 @@ namespace OregonNexus.Broker.Data.Migrations.PostgreSql
 
                     b.HasIndex("ParentOrganizationId");
 
-                    b.ToTable("EducationOrganizations", (string)null);
+                    b.ToTable("EducationOrganizations");
                 });
 
             modelBuilder.Entity("OregonNexus.Broker.Domain.EducationOrganizationConnectorSettings", b =>
@@ -302,7 +305,7 @@ namespace OregonNexus.Broker.Data.Migrations.PostgreSql
                     b.HasIndex("EducationOrganizationId", "Connector")
                         .IsUnique();
 
-                    b.ToTable("EducationOrganizationConnectorSettings", (string)null);
+                    b.ToTable("EducationOrganizationConnectorSettings");
                 });
 
             modelBuilder.Entity("OregonNexus.Broker.Domain.EducationOrganizationPayloadSettings", b =>
@@ -336,7 +339,7 @@ namespace OregonNexus.Broker.Data.Migrations.PostgreSql
                     b.HasIndex("EducationOrganizationId", "Payload")
                         .IsUnique();
 
-                    b.ToTable("EducationOrganizationPayloadSettings", (string)null);
+                    b.ToTable("EducationOrganizationPayloadSettings");
                 });
 
             modelBuilder.Entity("OregonNexus.Broker.Domain.Message", b =>
@@ -476,7 +479,7 @@ namespace OregonNexus.Broker.Data.Migrations.PostgreSql
 
                     b.HasIndex("EducationOrganizationId");
 
-                    b.ToTable("Requests", (string)null);
+                    b.ToTable("Requests");
                 });
 
             modelBuilder.Entity("OregonNexus.Broker.Domain.User", b =>
@@ -633,7 +636,7 @@ namespace OregonNexus.Broker.Data.Migrations.PostgreSql
                         .WithMany()
                         .HasForeignKey("EducationOrganizationId");
 
-                    b.OwnsOne("OregonNexus.Broker.Domain.EducationOrganizationPayloadSettings.IncomingPayloadSettings#OregonNexus.Broker.Domain.IncomingPayloadSettings", "IncomingPayloadSettings", b1 =>
+                    b.OwnsOne("OregonNexus.Broker.Domain.IncomingPayloadSettings", "IncomingPayloadSettings", b1 =>
                         {
                             b1.Property<Guid>("EducationOrganizationPayloadSettingsId")
                                 .HasColumnType("uuid");
@@ -643,14 +646,14 @@ namespace OregonNexus.Broker.Data.Migrations.PostgreSql
 
                             b1.HasKey("EducationOrganizationPayloadSettingsId");
 
-                            b1.ToTable("EducationOrganizationPayloadSettings", (string)null);
+                            b1.ToTable("EducationOrganizationPayloadSettings");
 
                             b1.ToJson("IncomingPayloadSettings");
 
                             b1.WithOwner()
                                 .HasForeignKey("EducationOrganizationPayloadSettingsId");
 
-                            b1.OwnsMany("OregonNexus.Broker.Domain.EducationOrganizationPayloadSettings.IncomingPayloadSettings#OregonNexus.Broker.Domain.IncomingPayloadSettings.PayloadContents#OregonNexus.Broker.Domain.PayloadSettingsContentType", "PayloadContents", b2 =>
+                            b1.OwnsMany("OregonNexus.Broker.Domain.PayloadSettingsContentType", "PayloadContents", b2 =>
                                 {
                                     b2.Property<Guid>("IncomingPayloadSettingsEducationOrganizationPayloadSettingsId")
                                         .HasColumnType("uuid");
@@ -668,7 +671,7 @@ namespace OregonNexus.Broker.Data.Migrations.PostgreSql
 
                                     b2.HasKey("IncomingPayloadSettingsEducationOrganizationPayloadSettingsId", "Id");
 
-                                    b2.ToTable("EducationOrganizationPayloadSettings", (string)null);
+                                    b2.ToTable("EducationOrganizationPayloadSettings");
 
                                     b2.WithOwner()
                                         .HasForeignKey("IncomingPayloadSettingsEducationOrganizationPayloadSettingsId");
@@ -677,7 +680,7 @@ namespace OregonNexus.Broker.Data.Migrations.PostgreSql
                             b1.Navigation("PayloadContents");
                         });
 
-                    b.OwnsOne("OregonNexus.Broker.Domain.EducationOrganizationPayloadSettings.OutgoingPayloadSettings#OregonNexus.Broker.Domain.OutgoingPayloadSettings", "OutgoingPayloadSettings", b1 =>
+                    b.OwnsOne("OregonNexus.Broker.Domain.OutgoingPayloadSettings", "OutgoingPayloadSettings", b1 =>
                         {
                             b1.Property<Guid>("EducationOrganizationPayloadSettingsId")
                                 .HasColumnType("uuid");
@@ -687,14 +690,14 @@ namespace OregonNexus.Broker.Data.Migrations.PostgreSql
 
                             b1.HasKey("EducationOrganizationPayloadSettingsId");
 
-                            b1.ToTable("EducationOrganizationPayloadSettings", (string)null);
+                            b1.ToTable("EducationOrganizationPayloadSettings");
 
                             b1.ToJson("OutgoingPayloadSettings");
 
                             b1.WithOwner()
                                 .HasForeignKey("EducationOrganizationPayloadSettingsId");
 
-                            b1.OwnsMany("OregonNexus.Broker.Domain.EducationOrganizationPayloadSettings.OutgoingPayloadSettings#OregonNexus.Broker.Domain.OutgoingPayloadSettings.PayloadContents#OregonNexus.Broker.Domain.PayloadSettingsContentType", "PayloadContents", b2 =>
+                            b1.OwnsMany("OregonNexus.Broker.Domain.PayloadSettingsContentType", "PayloadContents", b2 =>
                                 {
                                     b2.Property<Guid>("OutgoingPayloadSettingsEducationOrganizationPayloadSettingsId")
                                         .HasColumnType("uuid");
@@ -712,7 +715,7 @@ namespace OregonNexus.Broker.Data.Migrations.PostgreSql
 
                                     b2.HasKey("OutgoingPayloadSettingsEducationOrganizationPayloadSettingsId", "Id");
 
-                                    b2.ToTable("EducationOrganizationPayloadSettings", (string)null);
+                                    b2.ToTable("EducationOrganizationPayloadSettings");
 
                                     b2.WithOwner()
                                         .HasForeignKey("OutgoingPayloadSettingsEducationOrganizationPayloadSettingsId");
