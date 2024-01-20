@@ -21,7 +21,7 @@ public class CachedRepository<T> : IReadRepository<T> where T : BaseEntity, IAgg
         _sourceRepository = sourceRepository;
 
         _cacheOptions = new MemoryCacheEntryOptions()
-            .SetAbsoluteExpiration(relative: TimeSpan.FromSeconds(10));
+            .SetAbsoluteExpiration(absolute: new DateTimeOffset(DateTime.Today.AddDays(1)));
     }
 
     public Task<T> AddAsync(T entity)
@@ -61,12 +61,34 @@ public class CachedRepository<T> : IReadRepository<T> where T : BaseEntity, IAgg
 
     public Task<T?> FirstOrDefaultAsync(ISpecification<T> specification, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        if (specification.CacheEnabled && _cache is not null)
+        {
+            string key = $"{specification.CacheKey}-FirstOrDefaultAsync";
+            _logger.LogInformation($"Checking cache for {key}");
+            return _cache.GetOrCreate(key, entry =>
+            {
+                entry.SetOptions(_cacheOptions);
+                _logger.LogWarning($"Fetching source data for {key}");
+                return _sourceRepository.FirstOrDefaultAsync(specification, cancellationToken);
+            });
+        }
+        return _sourceRepository.FirstOrDefaultAsync(specification, cancellationToken);
     }
 
     public Task<TResult?> FirstOrDefaultAsync<TResult>(ISpecification<T, TResult> specification, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        if (specification.CacheEnabled)
+        {
+            string key = $"{specification.CacheKey}-FirstOrDefaultAsync";
+            _logger.LogInformation($"Checking cache for {key}");
+            return _cache.GetOrCreate(key, entry =>
+            {
+                entry.SetOptions(_cacheOptions);
+                _logger.LogWarning($"Fetching source data for {key}");
+                return _sourceRepository.FirstOrDefaultAsync(specification, cancellationToken);
+            });
+        }
+        return _sourceRepository.FirstOrDefaultAsync(specification, cancellationToken);
     }
 
     public Task<T> GetByIdAsync<TId>(TId id, CancellationToken cancellationToken = default)
@@ -120,15 +142,16 @@ public class CachedRepository<T> : IReadRepository<T> where T : BaseEntity, IAgg
         throw new NotImplementedException();
     }
 
-    public Task<List<T>> ListAsync(CancellationToken cancellationToken = default)
+    public async Task<List<T>> ListAsync(CancellationToken cancellationToken = default)
     {
         string key = $"{typeof(T).Name}-List";
         _logger.LogInformation($"Checking cache for {key}");
-        return _cache.GetOrCreate(key, entry =>
+
+        return await _cache.GetOrCreate(key, async entry =>
         {
         entry.SetOptions(_cacheOptions);
         _logger.LogWarning($"Fetching source data for {key}");
-        return _sourceRepository.ListAsync(cancellationToken);
+        return await _sourceRepository.ListAsync(cancellationToken);
         });
     }
 
@@ -173,12 +196,34 @@ public class CachedRepository<T> : IReadRepository<T> where T : BaseEntity, IAgg
 
     public Task<T?> SingleOrDefaultAsync(ISingleResultSpecification<T> specification, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        if (specification.CacheEnabled && _cache is not null)
+        {
+            string key = $"{specification.CacheKey}-SingleOrDefaultAsync";
+            _logger.LogInformation($"Checking cache for {key}");
+            return _cache.GetOrCreate(key, entry =>
+            {
+                entry.SetOptions(_cacheOptions);
+                _logger.LogWarning($"Fetching source data for {key}");
+                return _sourceRepository.SingleOrDefaultAsync(specification, cancellationToken);
+            });
+        }
+        return _sourceRepository.SingleOrDefaultAsync(specification, cancellationToken);
     }
 
     public Task<TResult?> SingleOrDefaultAsync<TResult>(ISingleResultSpecification<T, TResult> specification, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        if (specification.CacheEnabled)
+        {
+            string key = $"{specification.CacheKey}-SingleOrDefaultAsync";
+            _logger.LogInformation($"Checking cache for {key}");
+            return _cache.GetOrCreate(key, entry =>
+            {
+                entry.SetOptions(_cacheOptions);
+                _logger.LogWarning($"Fetching source data for {key}");
+                return _sourceRepository.SingleOrDefaultAsync(specification, cancellationToken);
+            });
+        }
+        return _sourceRepository.SingleOrDefaultAsync(specification, cancellationToken);
     }
 
     public Task UpdateAsync(T entity)
