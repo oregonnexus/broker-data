@@ -14,5 +14,7 @@ internal class EducationOrganizationSharedConfiguration : IEntityTypeConfigurati
     {   
         // Rename ID to UserId
         builder.Property(i => i.Id).HasColumnName("EducationOrganizationId");
+
+        builder.HasIndex(x => new { x.Domain } ).IsUnique();
     }
 }
