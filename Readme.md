@@ -9,13 +9,15 @@ Then do the instructions to add it to the profile
 ### Create Migration
 ```
 dotnet-ef migrations add InitialRequests --startup-project ../../broker-web/src/OregonNexus.Broker.Web.csproj --context OregonNexus.Broker.Data.PostgresDbContext --output-dir Migrations/PostgreSql
-
+```
+```
 dotnet-ef migrations add InitialRequests --startup-project ../../broker-web/src/OregonNexus.Broker.Web.csproj --context OregonNexus.Broker.Data.MsSqlDbContext --output-dir Migrations/MsSql
 ```
 ### Remove Last Migration
 ```
 dotnet-ef migrations remove --startup-project ../../broker-web/src/OregonNexus.Broker.Web.csproj --context OregonNexus.Broker.Data.PostgresDbContext
-
+```
+```
 dotnet-ef migrations remove --startup-project ../../broker-web/src/OregonNexus.Broker.Web.csproj --context OregonNexus.Broker.Data.MsSqlDbContext
 ```
 ### Apply to latest migration
