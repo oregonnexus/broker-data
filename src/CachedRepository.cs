@@ -70,7 +70,7 @@ public class CachedRepository<T> : IReadRepository<T> where T : BaseEntity, IAgg
                 entry.SetOptions(_cacheOptions);
                 _logger.LogWarning($"Fetching source data for {key}");
                 return _sourceRepository.FirstOrDefaultAsync(specification, cancellationToken);
-            });
+            })!;
         }
         return _sourceRepository.FirstOrDefaultAsync(specification, cancellationToken);
     }
@@ -86,12 +86,12 @@ public class CachedRepository<T> : IReadRepository<T> where T : BaseEntity, IAgg
                 entry.SetOptions(_cacheOptions);
                 _logger.LogWarning($"Fetching source data for {key}");
                 return _sourceRepository.FirstOrDefaultAsync(specification, cancellationToken);
-            });
+            })!;
         }
         return _sourceRepository.FirstOrDefaultAsync(specification, cancellationToken);
     }
 
-    public Task<T> GetByIdAsync<TId>(TId id, CancellationToken cancellationToken = default)
+    public Task<T?> GetByIdAsync<TId>(TId id, CancellationToken cancellationToken = default)
     {
         string key = $"{typeof(T).Name}-{id}";
         _logger.LogInformation("Checking cache for " + key);
@@ -100,10 +100,11 @@ public class CachedRepository<T> : IReadRepository<T> where T : BaseEntity, IAgg
         entry.SetOptions(_cacheOptions);
         _logger.LogWarning("Fetching source data for " + key);
         return _sourceRepository.GetByIdAsync(id, cancellationToken);
-        });
+        })!;
     }
 
-    public Task<T> GetBySpecAsync<Spec>(Spec specification,
+    [Obsolete]
+    public Task<T?> GetBySpecAsync<Spec>(Spec specification,
         CancellationToken cancellationToken = default) where Spec : ISingleResultSpecification, ISpecification<T>
     {
         if (specification.CacheEnabled)
@@ -115,12 +116,13 @@ public class CachedRepository<T> : IReadRepository<T> where T : BaseEntity, IAgg
             entry.SetOptions(_cacheOptions);
             _logger.LogWarning("Fetching source data for " + key);
             return _sourceRepository.GetBySpecAsync(specification, cancellationToken);
-        });
+        })!;
         }
         return _sourceRepository.GetBySpecAsync(specification);
     }
 
-    public Task<TResult> GetBySpecAsync<TResult>(ISpecification<T, TResult> specification,
+    [Obsolete]
+    public Task<TResult?> GetBySpecAsync<TResult>(ISpecification<T, TResult> specification,
         CancellationToken cancellationToken = default)
     {
         if (specification.CacheEnabled)
@@ -132,7 +134,7 @@ public class CachedRepository<T> : IReadRepository<T> where T : BaseEntity, IAgg
             entry.SetOptions(_cacheOptions);
             _logger.LogWarning("Fetching source data for " + key);
             return _sourceRepository.GetBySpecAsync(specification, cancellationToken);
-        });
+        })!;
         }
         return _sourceRepository.GetBySpecAsync(specification, cancellationToken);
     }
@@ -152,7 +154,7 @@ public class CachedRepository<T> : IReadRepository<T> where T : BaseEntity, IAgg
         entry.SetOptions(_cacheOptions);
         _logger.LogWarning($"Fetching source data for {key}");
         return await _sourceRepository.ListAsync(cancellationToken);
-        });
+        })!;
     }
 
     public Task<List<T>> ListAsync(ISpecification<T> specification,
@@ -167,7 +169,7 @@ public class CachedRepository<T> : IReadRepository<T> where T : BaseEntity, IAgg
             entry.SetOptions(_cacheOptions);
             _logger.LogWarning($"Fetching source data for {key}");
             return _sourceRepository.ListAsync(specification, cancellationToken);
-        });
+        })!;
         }
         return _sourceRepository.ListAsync(specification, cancellationToken);
     }
@@ -184,7 +186,7 @@ public class CachedRepository<T> : IReadRepository<T> where T : BaseEntity, IAgg
             entry.SetOptions(_cacheOptions);
             _logger.LogWarning($"Fetching source data for {key}");
             return _sourceRepository.ListAsync(specification, cancellationToken);
-        });
+        })!;
         }
         return _sourceRepository.ListAsync(specification, cancellationToken);
     }
@@ -205,7 +207,7 @@ public class CachedRepository<T> : IReadRepository<T> where T : BaseEntity, IAgg
                 entry.SetOptions(_cacheOptions);
                 _logger.LogWarning($"Fetching source data for {key}");
                 return _sourceRepository.SingleOrDefaultAsync(specification, cancellationToken);
-            });
+            })!;
         }
         return _sourceRepository.SingleOrDefaultAsync(specification, cancellationToken);
     }
@@ -221,7 +223,7 @@ public class CachedRepository<T> : IReadRepository<T> where T : BaseEntity, IAgg
                 entry.SetOptions(_cacheOptions);
                 _logger.LogWarning($"Fetching source data for {key}");
                 return _sourceRepository.SingleOrDefaultAsync(specification, cancellationToken);
-            });
+            })!;
         }
         return _sourceRepository.SingleOrDefaultAsync(specification, cancellationToken);
     }
