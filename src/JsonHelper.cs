@@ -21,20 +21,20 @@ public static class JsonHelper
         ValueConverter<T, string> converter = new ValueConverter<T, string>
         (
             v => JsonSerializer.Serialize(v, options),
-            v => JsonSerializer.Deserialize<T>(v, options)
+            v => JsonSerializer.Deserialize<T>(v, options)!
         );
 
         ValueComparer<T> comparer = new ValueComparer<T>
         (
             (l, r) => JsonSerializer.Serialize(l, options) == JsonSerializer.Serialize(r, options),
             v => v == null ? 0 : JsonSerializer.Serialize(v, options).GetHashCode(),
-            v => JsonSerializer.Deserialize<T>(JsonSerializer.Serialize(v, options), options)
+            v => JsonSerializer.Deserialize<T>(JsonSerializer.Serialize(v, options), options)!
         );
 
-        propertyBuilder.HasConversion(converter);
+        propertyBuilder.HasConversion(converter!);
         propertyBuilder.Metadata.SetValueConverter(converter);
         propertyBuilder.Metadata.SetValueComparer(comparer);
 
-        return propertyBuilder;
+        return propertyBuilder!;
     }
 }
