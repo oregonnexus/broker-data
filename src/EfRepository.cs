@@ -21,7 +21,7 @@ public class EfRepository<T> : RepositoryBase<T>, IRepository<T> where T : BaseE
 
     public override Task<T> AddAsync(T entity, CancellationToken cancellationToken = default)
     {
-        entity.CreatedAt = DateTimeOffset.Now;
+        entity.CreatedAt = DateTimeOffset.UtcNow;
         entity.CreatedBy = _currentUser.AuthenticatedUserId();
         entity.UpdatedAt = null;
         entity.UpdatedBy = null;
@@ -31,7 +31,7 @@ public class EfRepository<T> : RepositoryBase<T>, IRepository<T> where T : BaseE
 
     public override Task UpdateAsync(T entity, CancellationToken cancellationToken = default)
     {
-        entity.UpdatedAt = DateTimeOffset.Now;
+        entity.UpdatedAt = DateTimeOffset.UtcNow;
         entity.UpdatedBy = _currentUser.AuthenticatedUserId();
         
         return base.UpdateAsync(entity, cancellationToken);
