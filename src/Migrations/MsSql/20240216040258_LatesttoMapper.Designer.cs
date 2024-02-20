@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OregonNexus.Broker.Data;
 
@@ -11,9 +12,11 @@ using OregonNexus.Broker.Data;
 namespace OregonNexus.Broker.Data.Migrations.MsSql
 {
     [DbContext(typeof(MsSqlDbContext))]
-    partial class MsSqlDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240216040258_LatesttoMapper")]
+    partial class LatesttoMapper
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -342,50 +345,6 @@ namespace OregonNexus.Broker.Data.Migrations.MsSql
                         .HasFilter("[EducationOrganizationId] IS NOT NULL");
 
                     b.ToTable("EducationOrganizationPayloadSettings");
-                });
-
-            modelBuilder.Entity("OregonNexus.Broker.Domain.Mapping", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("MappingId");
-
-                    b.Property<DateTimeOffset>("CreatedAt")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<Guid?>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("DestinationMapping")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("MappingType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("OriginalSchema")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("RequestId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("SourceMapping")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("StudentAttributes")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTimeOffset?>("UpdatedAt")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<Guid?>("UpdatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RequestId");
-
-                    b.ToTable("Mappings", (string)null);
                 });
 
             modelBuilder.Entity("OregonNexus.Broker.Domain.Message", b =>
@@ -789,15 +748,6 @@ namespace OregonNexus.Broker.Data.Migrations.MsSql
                     b.Navigation("IncomingPayloadSettings");
 
                     b.Navigation("OutgoingPayloadSettings");
-                });
-
-            modelBuilder.Entity("OregonNexus.Broker.Domain.Mapping", b =>
-                {
-                    b.HasOne("OregonNexus.Broker.Domain.Request", "Request")
-                        .WithMany()
-                        .HasForeignKey("RequestId");
-
-                    b.Navigation("Request");
                 });
 
             modelBuilder.Entity("OregonNexus.Broker.Domain.Message", b =>
