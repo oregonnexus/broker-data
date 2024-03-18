@@ -4,9 +4,9 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using OregonNexus.Broker.Domain;
+using EdNexusData.Broker.Domain;
 
-namespace OregonNexus.Broker.Data.Configurations.MsSql;
+namespace EdNexusData.Broker.Data.Configurations.MsSql;
 
 internal class EducationOrganizationPayloadSettingsMsSqlConfiguration : IEntityTypeConfiguration<EducationOrganizationConnectorSettings>
 {

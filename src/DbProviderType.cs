@@ -1,4 +1,4 @@
-namespace OregonNexus.Broker.Data;
+namespace EdNexusData.Broker.Data;
 
 public class DbProviderType
 {

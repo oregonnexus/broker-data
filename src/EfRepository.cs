@@ -2,9 +2,9 @@
 // Author: Makoa Jacobsen, makoa@makoajacobsen.com
 
 using Ardalis.Specification.EntityFrameworkCore;
-using OregonNexus.Broker.SharedKernel;
+using EdNexusData.Broker.SharedKernel;
 
-namespace OregonNexus.Broker.Data;  
+namespace EdNexusData.Broker.Data;  
   
 // We are using the EfRepository from Ardalis.Specification
 // https://github.com/ardalis/Specification/blob/v5/ArdalisSpecificationEF/src/Ardalis.Specification.EF/RepositoryBaseOfT.cs

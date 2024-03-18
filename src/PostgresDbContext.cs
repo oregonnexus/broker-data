@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
-namespace OregonNexus.Broker.Data;
+namespace EdNexusData.Broker.Data;
 
 public class PostgresDbContext : BrokerDbContext
 {
@@ -19,7 +19,7 @@ public class PostgresDbContext : BrokerDbContext
     {
         base.OnModelCreating(modelBuilder);
         
-        var namespaces = new[] { "OregonNexus.Broker.Data.Configurations", "OregonNexus.Broker.Data.Configurations.PostgreSql" };
+        var namespaces = new[] { "EdNexusData.Broker.Data.Configurations", "EdNexusData.Broker.Data.Configurations.PostgreSql" };
         ApplyConfiguration(modelBuilder, namespaces);
     }
 }

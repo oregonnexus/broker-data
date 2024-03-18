@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using OregonNexus.Broker.Data;
+using EdNexusData.Broker.Data;
 
 #nullable disable
 
-namespace OregonNexus.Broker.Data.Migrations.PostgreSQL.Migrations
+namespace EdNexusData.Broker.Data.Migrations.PostgreSQL.Migrations
 {
     [DbContext(typeof(PostgresDbContext))]
     [Migration("20231105004550_EdOrgAddress")]
@@ -221,7 +221,7 @@ namespace OregonNexus.Broker.Data.Migrations.PostgreSQL.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("OregonNexus.Broker.Domain.EducationOrganization", b =>
+            modelBuilder.Entity("EdNexusData.Broker.Domain.EducationOrganization", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -272,7 +272,7 @@ namespace OregonNexus.Broker.Data.Migrations.PostgreSQL.Migrations
                     b.ToTable("EducationOrganizations");
                 });
 
-            modelBuilder.Entity("OregonNexus.Broker.Domain.EducationOrganizationConnectorSettings", b =>
+            modelBuilder.Entity("EdNexusData.Broker.Domain.EducationOrganizationConnectorSettings", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -309,7 +309,7 @@ namespace OregonNexus.Broker.Data.Migrations.PostgreSQL.Migrations
                     b.ToTable("EducationOrganizationConnectorSettings");
                 });
 
-            modelBuilder.Entity("OregonNexus.Broker.Domain.EducationOrganizationPayloadSettings", b =>
+            modelBuilder.Entity("EdNexusData.Broker.Domain.EducationOrganizationPayloadSettings", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -349,7 +349,7 @@ namespace OregonNexus.Broker.Data.Migrations.PostgreSQL.Migrations
                     b.ToTable("EducationOrganizationPayloadSettings");
                 });
 
-            modelBuilder.Entity("OregonNexus.Broker.Domain.Message", b =>
+            modelBuilder.Entity("EdNexusData.Broker.Domain.Message", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -390,7 +390,7 @@ namespace OregonNexus.Broker.Data.Migrations.PostgreSQL.Migrations
                     b.ToTable("Messages", (string)null);
                 });
 
-            modelBuilder.Entity("OregonNexus.Broker.Domain.PayloadContent", b =>
+            modelBuilder.Entity("EdNexusData.Broker.Domain.PayloadContent", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -431,7 +431,7 @@ namespace OregonNexus.Broker.Data.Migrations.PostgreSQL.Migrations
                     b.ToTable("PayloadContents", (string)null);
                 });
 
-            modelBuilder.Entity("OregonNexus.Broker.Domain.Request", b =>
+            modelBuilder.Entity("EdNexusData.Broker.Domain.Request", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -481,7 +481,7 @@ namespace OregonNexus.Broker.Data.Migrations.PostgreSQL.Migrations
                     b.ToTable("Requests");
                 });
 
-            modelBuilder.Entity("OregonNexus.Broker.Domain.User", b =>
+            modelBuilder.Entity("EdNexusData.Broker.Domain.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid")
@@ -522,7 +522,7 @@ namespace OregonNexus.Broker.Data.Migrations.PostgreSQL.Migrations
                     b.ToTable("Users", (string)null);
                 });
 
-            modelBuilder.Entity("OregonNexus.Broker.Domain.UserRole", b =>
+            modelBuilder.Entity("EdNexusData.Broker.Domain.UserRole", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -611,36 +611,36 @@ namespace OregonNexus.Broker.Data.Migrations.PostgreSQL.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("OregonNexus.Broker.Domain.EducationOrganization", b =>
+            modelBuilder.Entity("EdNexusData.Broker.Domain.EducationOrganization", b =>
                 {
-                    b.HasOne("OregonNexus.Broker.Domain.EducationOrganization", "ParentOrganization")
+                    b.HasOne("EdNexusData.Broker.Domain.EducationOrganization", "ParentOrganization")
                         .WithMany()
                         .HasForeignKey("ParentOrganizationId");
 
                     b.Navigation("ParentOrganization");
                 });
 
-            modelBuilder.Entity("OregonNexus.Broker.Domain.EducationOrganizationConnectorSettings", b =>
+            modelBuilder.Entity("EdNexusData.Broker.Domain.EducationOrganizationConnectorSettings", b =>
                 {
-                    b.HasOne("OregonNexus.Broker.Domain.EducationOrganization", "EducationOrganization")
+                    b.HasOne("EdNexusData.Broker.Domain.EducationOrganization", "EducationOrganization")
                         .WithMany()
                         .HasForeignKey("EducationOrganizationId");
 
                     b.Navigation("EducationOrganization");
                 });
 
-            modelBuilder.Entity("OregonNexus.Broker.Domain.EducationOrganizationPayloadSettings", b =>
+            modelBuilder.Entity("EdNexusData.Broker.Domain.EducationOrganizationPayloadSettings", b =>
                 {
-                    b.HasOne("OregonNexus.Broker.Domain.EducationOrganization", "EducationOrganization")
+                    b.HasOne("EdNexusData.Broker.Domain.EducationOrganization", "EducationOrganization")
                         .WithMany()
                         .HasForeignKey("EducationOrganizationId");
 
                     b.Navigation("EducationOrganization");
                 });
 
-            modelBuilder.Entity("OregonNexus.Broker.Domain.Message", b =>
+            modelBuilder.Entity("EdNexusData.Broker.Domain.Message", b =>
                 {
-                    b.HasOne("OregonNexus.Broker.Domain.Request", "Request")
+                    b.HasOne("EdNexusData.Broker.Domain.Request", "Request")
                         .WithMany()
                         .HasForeignKey("RequestId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -649,9 +649,9 @@ namespace OregonNexus.Broker.Data.Migrations.PostgreSQL.Migrations
                     b.Navigation("Request");
                 });
 
-            modelBuilder.Entity("OregonNexus.Broker.Domain.PayloadContent", b =>
+            modelBuilder.Entity("EdNexusData.Broker.Domain.PayloadContent", b =>
                 {
-                    b.HasOne("OregonNexus.Broker.Domain.Message", "Message")
+                    b.HasOne("EdNexusData.Broker.Domain.Message", "Message")
                         .WithMany()
                         .HasForeignKey("MessageId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -660,31 +660,31 @@ namespace OregonNexus.Broker.Data.Migrations.PostgreSQL.Migrations
                     b.Navigation("Message");
                 });
 
-            modelBuilder.Entity("OregonNexus.Broker.Domain.Request", b =>
+            modelBuilder.Entity("EdNexusData.Broker.Domain.Request", b =>
                 {
-                    b.HasOne("OregonNexus.Broker.Domain.EducationOrganization", "EducationOrganization")
+                    b.HasOne("EdNexusData.Broker.Domain.EducationOrganization", "EducationOrganization")
                         .WithMany()
                         .HasForeignKey("EducationOrganizationId");
 
                     b.Navigation("EducationOrganization");
                 });
 
-            modelBuilder.Entity("OregonNexus.Broker.Domain.User", b =>
+            modelBuilder.Entity("EdNexusData.Broker.Domain.User", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser<System.Guid>", null)
                         .WithOne()
-                        .HasForeignKey("OregonNexus.Broker.Domain.User", "Id")
+                        .HasForeignKey("EdNexusData.Broker.Domain.User", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("OregonNexus.Broker.Domain.UserRole", b =>
+            modelBuilder.Entity("EdNexusData.Broker.Domain.UserRole", b =>
                 {
-                    b.HasOne("OregonNexus.Broker.Domain.EducationOrganization", "EducationOrganization")
+                    b.HasOne("EdNexusData.Broker.Domain.EducationOrganization", "EducationOrganization")
                         .WithMany()
                         .HasForeignKey("EducationOrganizationId");
 
-                    b.HasOne("OregonNexus.Broker.Domain.User", "User")
+                    b.HasOne("EdNexusData.Broker.Domain.User", "User")
                         .WithMany("UserRoles")
                         .HasForeignKey("UserId");
 
@@ -693,7 +693,7 @@ namespace OregonNexus.Broker.Data.Migrations.PostgreSQL.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("OregonNexus.Broker.Domain.User", b =>
+            modelBuilder.Entity("EdNexusData.Broker.Domain.User", b =>
                 {
                     b.Navigation("UserRoles");
                 });

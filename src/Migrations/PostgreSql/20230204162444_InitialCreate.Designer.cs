@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using OregonNexus.Broker.Data;
+using EdNexusData.Broker.Data;
 
 #nullable disable
 
-namespace OregonNexus.Broker.Data.Migrations.PostgreSQL.Migrations
+namespace EdNexusData.Broker.Data.Migrations.PostgreSQL.Migrations
 {
     [DbContext(typeof(PostgresDbContext))]
     [Migration("20230204162444_InitialCreate")]

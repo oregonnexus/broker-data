@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace OregonNexus.Broker.Data.Migrations.PostgreSql
+namespace EdNexusData.Broker.Data.Migrations.PostgreSql
 {
     /// <inheritdoc />
     public partial class EdOrgUniqueIndexForDomain : Migration

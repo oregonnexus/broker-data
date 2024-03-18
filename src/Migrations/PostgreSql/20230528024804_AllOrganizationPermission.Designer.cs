@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using OregonNexus.Broker.Data;
+using EdNexusData.Broker.Data;
 
 #nullable disable
 
-namespace OregonNexus.Broker.Data.Migrations.PostgreSQL.Migrations
+namespace EdNexusData.Broker.Data.Migrations.PostgreSQL.Migrations
 {
     [DbContext(typeof(PostgresDbContext))]
     [Migration("20230528024804_AllOrganizationPermission")]
@@ -220,7 +220,7 @@ namespace OregonNexus.Broker.Data.Migrations.PostgreSQL.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("OregonNexus.Broker.Domain.EducationOrganization", b =>
+            modelBuilder.Entity("EdNexusData.Broker.Domain.EducationOrganization", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -259,7 +259,7 @@ namespace OregonNexus.Broker.Data.Migrations.PostgreSQL.Migrations
                     b.ToTable("EducationOrganizations");
                 });
 
-            modelBuilder.Entity("OregonNexus.Broker.Domain.User", b =>
+            modelBuilder.Entity("EdNexusData.Broker.Domain.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid")
@@ -300,7 +300,7 @@ namespace OregonNexus.Broker.Data.Migrations.PostgreSQL.Migrations
                     b.ToTable("Users", (string)null);
                 });
 
-            modelBuilder.Entity("OregonNexus.Broker.Domain.UserRole", b =>
+            modelBuilder.Entity("EdNexusData.Broker.Domain.UserRole", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -389,31 +389,31 @@ namespace OregonNexus.Broker.Data.Migrations.PostgreSQL.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("OregonNexus.Broker.Domain.EducationOrganization", b =>
+            modelBuilder.Entity("EdNexusData.Broker.Domain.EducationOrganization", b =>
                 {
-                    b.HasOne("OregonNexus.Broker.Domain.EducationOrganization", "ParentOrganization")
+                    b.HasOne("EdNexusData.Broker.Domain.EducationOrganization", "ParentOrganization")
                         .WithMany()
                         .HasForeignKey("ParentOrganizationId");
 
                     b.Navigation("ParentOrganization");
                 });
 
-            modelBuilder.Entity("OregonNexus.Broker.Domain.User", b =>
+            modelBuilder.Entity("EdNexusData.Broker.Domain.User", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser<System.Guid>", null)
                         .WithOne()
-                        .HasForeignKey("OregonNexus.Broker.Domain.User", "Id")
+                        .HasForeignKey("EdNexusData.Broker.Domain.User", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("OregonNexus.Broker.Domain.UserRole", b =>
+            modelBuilder.Entity("EdNexusData.Broker.Domain.UserRole", b =>
                 {
-                    b.HasOne("OregonNexus.Broker.Domain.EducationOrganization", "EducationOrganization")
+                    b.HasOne("EdNexusData.Broker.Domain.EducationOrganization", "EducationOrganization")
                         .WithMany()
                         .HasForeignKey("EducationOrganizationId");
 
-                    b.HasOne("OregonNexus.Broker.Domain.User", "User")
+                    b.HasOne("EdNexusData.Broker.Domain.User", "User")
                         .WithMany("UserRoles")
                         .HasForeignKey("UserId");
 
@@ -422,7 +422,7 @@ namespace OregonNexus.Broker.Data.Migrations.PostgreSQL.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("OregonNexus.Broker.Domain.User", b =>
+            modelBuilder.Entity("EdNexusData.Broker.Domain.User", b =>
                 {
                     b.Navigation("UserRoles");
                 });

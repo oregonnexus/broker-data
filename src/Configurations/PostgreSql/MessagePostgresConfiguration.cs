@@ -4,9 +4,9 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using OregonNexus.Broker.Domain;
+using EdNexusData.Broker.Domain;
 
-namespace OregonNexus.Broker.Data.Configurations.PostgreSql;
+namespace EdNexusData.Broker.Data.Configurations.PostgreSql;
 
 internal class MessagePostgresConfiguration : IEntityTypeConfiguration<Message>
 {

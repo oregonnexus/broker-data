@@ -3,8 +3,8 @@ using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using OregonNexus.Broker.Data;
-using OregonNexus.Broker.SharedKernel;
+using EdNexusData.Broker.Data;
+using EdNexusData.Broker.SharedKernel;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
@@ -27,14 +27,14 @@ public static class BrokerDataServiceCollectionExtension
         //     {
         //         options.UseSqlServer(
         //             config.GetConnectionString("MsSqlBrokerDatabase")!,
-        //             x => x.MigrationsAssembly("OregonNexus.Broker.Data.Migrations.SqlServer")
+        //             x => x.MigrationsAssembly("EdNexusData.Broker.Data.Migrations.SqlServer")
         //         );
         //     }
         //     if (pgSqlConnectionString is not null && pgSqlConnectionString != "")
         //     {
         //         options.UseNpgsql(
         //             config.GetConnectionString("PgSqlBrokerDatabase")!,
-        //             x => x.MigrationsAssembly("OregonNexus.Broker.Data.Migrations.PostgreSQL")
+        //             x => x.MigrationsAssembly("EdNexusData.Broker.Data.Migrations.PostgreSQL")
         //         );
         //     }
         // }

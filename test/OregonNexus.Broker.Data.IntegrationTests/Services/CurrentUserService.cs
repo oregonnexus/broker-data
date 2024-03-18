@@ -1,6 +1,6 @@
-using OregonNexus.Broker.SharedKernel;
+using EdNexusData.Broker.SharedKernel;
 
-namespace OregonNexus.Broker.Data.IntegrationTests.Services;
+namespace EdNexusData.Broker.Data.IntegrationTests.Services;
 
 public class CurrentUserService : ICurrentUser
 {

@@ -2,7 +2,7 @@
 // using Microsoft.EntityFrameworkCore;
 // using Microsoft.Extensions.Configuration;
 
-// namespace OregonNexus.Broker.Data;
+// namespace EdNexusData.Broker.Data;
 
 // public class ContractContextFactory : IDesignTimeDbContextFactory<BrokerDbContext>
 // {
@@ -21,14 +21,14 @@
 //         {
 //             optionsBuilder.UseSqlServer(
 //                 config.GetConnectionString("MsSqlBrokerDatabase")!,
-//                 x => x.MigrationsAssembly("OregonNexus.Broker.Data.Migrations.SqlServer")
+//                 x => x.MigrationsAssembly("EdNexusData.Broker.Data.Migrations.SqlServer")
 //             );
 //         }
 //         if (pgSqlConnectionString is not null && pgSqlConnectionString != "")
 //         {
 //             optionsBuilder.UseNpgsql(
 //                 config.GetConnectionString("PgSqlBrokerDatabase")!,
-//                 x => x.MigrationsAssembly("OregonNexus.Broker.Data.Migrations.PostgreSQL")
+//                 x => x.MigrationsAssembly("EdNexusData.Broker.Data.Migrations.PostgreSQL")
 //             );
 //         }
 

@@ -4,9 +4,9 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using OregonNexus.Broker.Domain;
+using EdNexusData.Broker.Domain;
 
-namespace OregonNexus.Broker.Data.Configurations;
+namespace EdNexusData.Broker.Data.Configurations;
 
 internal class MappingSharedConfiguration : IEntityTypeConfiguration<Mapping>
 {

@@ -6,10 +6,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
-using OregonNexus.Broker.Domain;
+using EdNexusData.Broker.Domain;
 using Microsoft.Extensions.Configuration;
 
-namespace OregonNexus.Broker.Data;
+namespace EdNexusData.Broker.Data;
 
 public class BrokerDbContext : IdentityDbContext<IdentityUser<Guid>, IdentityRole<Guid>, Guid>
 {

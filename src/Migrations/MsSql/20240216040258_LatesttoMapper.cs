@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace OregonNexus.Broker.Data.Migrations.MsSql
+namespace EdNexusData.Broker.Data.Migrations.MsSql
 {
     /// <inheritdoc />
     public partial class LatesttoMapper : Migration

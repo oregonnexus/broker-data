@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using OregonNexus.Broker.Data;
+using EdNexusData.Broker.Data;
 
 #nullable disable
 
-namespace OregonNexus.Broker.Data.Migrations.MsSql
+namespace EdNexusData.Broker.Data.Migrations.MsSql
 {
     [DbContext(typeof(MsSqlDbContext))]
     [Migration("20240220053830_InitialMapping")]
@@ -222,7 +222,7 @@ namespace OregonNexus.Broker.Data.Migrations.MsSql
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("OregonNexus.Broker.Domain.EducationOrganization", b =>
+            modelBuilder.Entity("EdNexusData.Broker.Domain.EducationOrganization", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -274,7 +274,7 @@ namespace OregonNexus.Broker.Data.Migrations.MsSql
                     b.ToTable("EducationOrganizations");
                 });
 
-            modelBuilder.Entity("OregonNexus.Broker.Domain.EducationOrganizationConnectorSettings", b =>
+            modelBuilder.Entity("EdNexusData.Broker.Domain.EducationOrganizationConnectorSettings", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -312,7 +312,7 @@ namespace OregonNexus.Broker.Data.Migrations.MsSql
                     b.ToTable("EducationOrganizationConnectorSettings");
                 });
 
-            modelBuilder.Entity("OregonNexus.Broker.Domain.EducationOrganizationPayloadSettings", b =>
+            modelBuilder.Entity("EdNexusData.Broker.Domain.EducationOrganizationPayloadSettings", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -347,7 +347,7 @@ namespace OregonNexus.Broker.Data.Migrations.MsSql
                     b.ToTable("EducationOrganizationPayloadSettings");
                 });
 
-            modelBuilder.Entity("OregonNexus.Broker.Domain.Mapping", b =>
+            modelBuilder.Entity("EdNexusData.Broker.Domain.Mapping", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -391,7 +391,7 @@ namespace OregonNexus.Broker.Data.Migrations.MsSql
                     b.ToTable("Mappings", (string)null);
                 });
 
-            modelBuilder.Entity("OregonNexus.Broker.Domain.Message", b =>
+            modelBuilder.Entity("EdNexusData.Broker.Domain.Message", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -432,7 +432,7 @@ namespace OregonNexus.Broker.Data.Migrations.MsSql
                     b.ToTable("Messages", (string)null);
                 });
 
-            modelBuilder.Entity("OregonNexus.Broker.Domain.PayloadContent", b =>
+            modelBuilder.Entity("EdNexusData.Broker.Domain.PayloadContent", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -481,7 +481,7 @@ namespace OregonNexus.Broker.Data.Migrations.MsSql
                     b.ToTable("PayloadContents", (string)null);
                 });
 
-            modelBuilder.Entity("OregonNexus.Broker.Domain.Request", b =>
+            modelBuilder.Entity("EdNexusData.Broker.Domain.Request", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -544,7 +544,7 @@ namespace OregonNexus.Broker.Data.Migrations.MsSql
                     b.ToTable("Requests");
                 });
 
-            modelBuilder.Entity("OregonNexus.Broker.Domain.User", b =>
+            modelBuilder.Entity("EdNexusData.Broker.Domain.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier")
@@ -585,7 +585,7 @@ namespace OregonNexus.Broker.Data.Migrations.MsSql
                     b.ToTable("Users", (string)null);
                 });
 
-            modelBuilder.Entity("OregonNexus.Broker.Domain.UserRole", b =>
+            modelBuilder.Entity("EdNexusData.Broker.Domain.UserRole", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -675,31 +675,31 @@ namespace OregonNexus.Broker.Data.Migrations.MsSql
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("OregonNexus.Broker.Domain.EducationOrganization", b =>
+            modelBuilder.Entity("EdNexusData.Broker.Domain.EducationOrganization", b =>
                 {
-                    b.HasOne("OregonNexus.Broker.Domain.EducationOrganization", "ParentOrganization")
+                    b.HasOne("EdNexusData.Broker.Domain.EducationOrganization", "ParentOrganization")
                         .WithMany("EducationOrganizations")
                         .HasForeignKey("ParentOrganizationId");
 
                     b.Navigation("ParentOrganization");
                 });
 
-            modelBuilder.Entity("OregonNexus.Broker.Domain.EducationOrganizationConnectorSettings", b =>
+            modelBuilder.Entity("EdNexusData.Broker.Domain.EducationOrganizationConnectorSettings", b =>
                 {
-                    b.HasOne("OregonNexus.Broker.Domain.EducationOrganization", "EducationOrganization")
+                    b.HasOne("EdNexusData.Broker.Domain.EducationOrganization", "EducationOrganization")
                         .WithMany()
                         .HasForeignKey("EducationOrganizationId");
 
                     b.Navigation("EducationOrganization");
                 });
 
-            modelBuilder.Entity("OregonNexus.Broker.Domain.EducationOrganizationPayloadSettings", b =>
+            modelBuilder.Entity("EdNexusData.Broker.Domain.EducationOrganizationPayloadSettings", b =>
                 {
-                    b.HasOne("OregonNexus.Broker.Domain.EducationOrganization", "EducationOrganization")
+                    b.HasOne("EdNexusData.Broker.Domain.EducationOrganization", "EducationOrganization")
                         .WithMany()
                         .HasForeignKey("EducationOrganizationId");
 
-                    b.OwnsOne("OregonNexus.Broker.Domain.IncomingPayloadSettings", "IncomingPayloadSettings", b1 =>
+                    b.OwnsOne("EdNexusData.Broker.Domain.IncomingPayloadSettings", "IncomingPayloadSettings", b1 =>
                         {
                             b1.Property<Guid>("EducationOrganizationPayloadSettingsId")
                                 .HasColumnType("uniqueidentifier");
@@ -716,7 +716,7 @@ namespace OregonNexus.Broker.Data.Migrations.MsSql
                             b1.WithOwner()
                                 .HasForeignKey("EducationOrganizationPayloadSettingsId");
 
-                            b1.OwnsMany("OregonNexus.Broker.Domain.PayloadSettingsContentType", "PayloadContents", b2 =>
+                            b1.OwnsMany("EdNexusData.Broker.Domain.PayloadSettingsContentType", "PayloadContents", b2 =>
                                 {
                                     b2.Property<Guid>("IncomingPayloadSettingsEducationOrganizationPayloadSettingsId")
                                         .HasColumnType("uniqueidentifier");
@@ -743,7 +743,7 @@ namespace OregonNexus.Broker.Data.Migrations.MsSql
                             b1.Navigation("PayloadContents");
                         });
 
-                    b.OwnsOne("OregonNexus.Broker.Domain.OutgoingPayloadSettings", "OutgoingPayloadSettings", b1 =>
+                    b.OwnsOne("EdNexusData.Broker.Domain.OutgoingPayloadSettings", "OutgoingPayloadSettings", b1 =>
                         {
                             b1.Property<Guid>("EducationOrganizationPayloadSettingsId")
                                 .HasColumnType("uniqueidentifier");
@@ -760,7 +760,7 @@ namespace OregonNexus.Broker.Data.Migrations.MsSql
                             b1.WithOwner()
                                 .HasForeignKey("EducationOrganizationPayloadSettingsId");
 
-                            b1.OwnsMany("OregonNexus.Broker.Domain.PayloadSettingsContentType", "PayloadContents", b2 =>
+                            b1.OwnsMany("EdNexusData.Broker.Domain.PayloadSettingsContentType", "PayloadContents", b2 =>
                                 {
                                     b2.Property<Guid>("OutgoingPayloadSettingsEducationOrganizationPayloadSettingsId")
                                         .HasColumnType("uniqueidentifier");
@@ -794,18 +794,18 @@ namespace OregonNexus.Broker.Data.Migrations.MsSql
                     b.Navigation("OutgoingPayloadSettings");
                 });
 
-            modelBuilder.Entity("OregonNexus.Broker.Domain.Mapping", b =>
+            modelBuilder.Entity("EdNexusData.Broker.Domain.Mapping", b =>
                 {
-                    b.HasOne("OregonNexus.Broker.Domain.Request", "Request")
+                    b.HasOne("EdNexusData.Broker.Domain.Request", "Request")
                         .WithMany()
                         .HasForeignKey("RequestId");
 
                     b.Navigation("Request");
                 });
 
-            modelBuilder.Entity("OregonNexus.Broker.Domain.Message", b =>
+            modelBuilder.Entity("EdNexusData.Broker.Domain.Message", b =>
                 {
-                    b.HasOne("OregonNexus.Broker.Domain.Request", "Request")
+                    b.HasOne("EdNexusData.Broker.Domain.Request", "Request")
                         .WithMany("Messages")
                         .HasForeignKey("RequestId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -814,13 +814,13 @@ namespace OregonNexus.Broker.Data.Migrations.MsSql
                     b.Navigation("Request");
                 });
 
-            modelBuilder.Entity("OregonNexus.Broker.Domain.PayloadContent", b =>
+            modelBuilder.Entity("EdNexusData.Broker.Domain.PayloadContent", b =>
                 {
-                    b.HasOne("OregonNexus.Broker.Domain.Message", "Message")
+                    b.HasOne("EdNexusData.Broker.Domain.Message", "Message")
                         .WithMany("PayloadContents")
                         .HasForeignKey("MessageId");
 
-                    b.HasOne("OregonNexus.Broker.Domain.Request", "Request")
+                    b.HasOne("EdNexusData.Broker.Domain.Request", "Request")
                         .WithMany("PayloadContents")
                         .HasForeignKey("RequestId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -831,9 +831,9 @@ namespace OregonNexus.Broker.Data.Migrations.MsSql
                     b.Navigation("Request");
                 });
 
-            modelBuilder.Entity("OregonNexus.Broker.Domain.Request", b =>
+            modelBuilder.Entity("EdNexusData.Broker.Domain.Request", b =>
                 {
-                    b.HasOne("OregonNexus.Broker.Domain.EducationOrganization", "EducationOrganization")
+                    b.HasOne("EdNexusData.Broker.Domain.EducationOrganization", "EducationOrganization")
                         .WithMany()
                         .HasForeignKey("EducationOrganizationId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -842,22 +842,22 @@ namespace OregonNexus.Broker.Data.Migrations.MsSql
                     b.Navigation("EducationOrganization");
                 });
 
-            modelBuilder.Entity("OregonNexus.Broker.Domain.User", b =>
+            modelBuilder.Entity("EdNexusData.Broker.Domain.User", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser<System.Guid>", null)
                         .WithOne()
-                        .HasForeignKey("OregonNexus.Broker.Domain.User", "Id")
+                        .HasForeignKey("EdNexusData.Broker.Domain.User", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("OregonNexus.Broker.Domain.UserRole", b =>
+            modelBuilder.Entity("EdNexusData.Broker.Domain.UserRole", b =>
                 {
-                    b.HasOne("OregonNexus.Broker.Domain.EducationOrganization", "EducationOrganization")
+                    b.HasOne("EdNexusData.Broker.Domain.EducationOrganization", "EducationOrganization")
                         .WithMany()
                         .HasForeignKey("EducationOrganizationId");
 
-                    b.HasOne("OregonNexus.Broker.Domain.User", "User")
+                    b.HasOne("EdNexusData.Broker.Domain.User", "User")
                         .WithMany("UserRoles")
                         .HasForeignKey("UserId");
 
@@ -866,24 +866,24 @@ namespace OregonNexus.Broker.Data.Migrations.MsSql
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("OregonNexus.Broker.Domain.EducationOrganization", b =>
+            modelBuilder.Entity("EdNexusData.Broker.Domain.EducationOrganization", b =>
                 {
                     b.Navigation("EducationOrganizations");
                 });
 
-            modelBuilder.Entity("OregonNexus.Broker.Domain.Message", b =>
+            modelBuilder.Entity("EdNexusData.Broker.Domain.Message", b =>
                 {
                     b.Navigation("PayloadContents");
                 });
 
-            modelBuilder.Entity("OregonNexus.Broker.Domain.Request", b =>
+            modelBuilder.Entity("EdNexusData.Broker.Domain.Request", b =>
                 {
                     b.Navigation("Messages");
 
                     b.Navigation("PayloadContents");
                 });
 
-            modelBuilder.Entity("OregonNexus.Broker.Domain.User", b =>
+            modelBuilder.Entity("EdNexusData.Broker.Domain.User", b =>
                 {
                     b.Navigation("UserRoles");
                 });

@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\broker-core\src\OregonNexus.Broker.Domain\OregonNexus.Broker.Domain.csproj" />
+    <ProjectReference Include="..\..\broker-core\src\EdNexusData.Broker.Domain\EdNexusData.Broker.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>

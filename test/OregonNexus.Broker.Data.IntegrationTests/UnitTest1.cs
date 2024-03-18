@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
-using OregonNexus.Broker.Data.IntegrationTests.Fixtures;
+using EdNexusData.Broker.Data.IntegrationTests.Fixtures;
 
-namespace OregonNexus.Broker.Data.IntegrationTests;
+namespace EdNexusData.Broker.Data.IntegrationTests;
 
 [Collection("BrokerWebDICollection")]
 public class UnitTest1

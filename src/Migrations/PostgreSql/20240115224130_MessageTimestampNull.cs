@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace OregonNexus.Broker.Data.Migrations.PostgreSql
+namespace EdNexusData.Broker.Data.Migrations.PostgreSql
 {
     /// <inheritdoc />
     public partial class MessageTimestampNull : Migration

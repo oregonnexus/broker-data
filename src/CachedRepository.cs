@@ -1,9 +1,9 @@
 using Ardalis.Specification;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
-using OregonNexus.Broker.SharedKernel;
+using EdNexusData.Broker.SharedKernel;
 
-namespace OregonNexus.Broker.Data;
+namespace EdNexusData.Broker.Data;
 
 public class CachedRepository<T> : IReadRepository<T> where T : BaseEntity, IAggregateRoot
 {

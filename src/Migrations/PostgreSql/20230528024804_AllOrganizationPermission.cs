@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace OregonNexus.Broker.Data.Migrations.PostgreSQL.Migrations
+namespace EdNexusData.Broker.Data.Migrations.PostgreSQL.Migrations
 {
     /// <inheritdoc />
     public partial class AllOrganizationPermission : Migration

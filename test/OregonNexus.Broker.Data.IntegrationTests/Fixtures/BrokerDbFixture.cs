@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using OregonNexus.Broker.Domain;
-using OregonNexus.Broker.SharedKernel;
+using EdNexusData.Broker.Domain;
+using EdNexusData.Broker.SharedKernel;
 
-namespace OregonNexus.Broker.Data.IntegrationTests.Fixtures;
+namespace EdNexusData.Broker.Data.IntegrationTests.Fixtures;
 
 public static class BrokerDbFixture 
 {

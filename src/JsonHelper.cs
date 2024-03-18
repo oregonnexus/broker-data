@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace OregonNexus.Broker.Data;
+namespace EdNexusData.Broker.Data;
 
 public static class JsonHelper
 {
